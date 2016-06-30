@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left"
+            android:orientation="horizontal"
+            android:layout_gravity="left">
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" CRÉDITOS: "
+            android:textSize="40dp"
+            android:editable="false"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            android:typeface="serif"
+            android:textStyle="bold|italic" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Espaço Interativo de Ciências: um compromisso com a educação e difusão do conhecimento em biodiversidade e descoberta de fármacos."
+            android:textSize="12dp"
+            android:editable="false"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            android:gravity="center_horizontal"
+            android:textIsSelectable="false"
+            android:textStyle="bold"
+            android:typeface="normal" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Centro de Pesquisa e Inovação em Biodiversidade e Fármaco"
+            android:textSize="12dp"
+            android:editable="false"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            android:gravity="center_horizontal"
+            android:textIsSelectable="false"
+            android:textStyle="bold"
+            android:typeface="normal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(CIBFar/CEPID/ FAPESP)"
+            android:textSize="12dp"
+            android:editable="false"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            android:gravity="center_horizontal"
+            android:textIsSelectable="false"
+            android:textStyle="bold"
+            android:typeface="normal"
+            android:layout_marginTop="10dp" />
+
+        //*********************************INICIO*********************
+
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Coordenação Geral"
+                 android:editable="false"
+                 android:layout_gravity="left"
+                 android:textColor="#000000"
+                 android:textStyle="bold"
+                 android:layout_marginLeft="20dp"
+                 android:layout_marginTop="20dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="left"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp">
+                 <ImageView
+                     android:layout_width="15dp"
+                     android:layout_height="20dp"
+                     android:layout_gravity="left"
+                     android:src="@drawable/male" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Glaucius Oliva"
+                    android:editable="false"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#000000" />
+            </LinearLayout>
+        //***********************************FIM**********************
+        //*********************************INICIO*********************
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vice-Coordenação"
+            android:editable="false"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="22dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp">
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="20dp"
+                android:layout_gravity="left"
+                android:src="@drawable/male" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vanderlan S. Bolzani"
+                android:editable="false"
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000" />
+        </LinearLayout>
+        //***********************************FIM**********************
+        //*********************************INICIO*********************
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coordenador de Inovação"
+            android:editable="false"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="22dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp">
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="20dp"
+                android:layout_gravity="left"
+                android:src="@drawable/male" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adriano D. Andricopulo"
+                android:editable="false"
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000" />
+        </LinearLayout>
+        //***********************************FIM**********************
+        //*********************************INICIO*********************
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coordenadora de Educação e Difusão de Ciências"
+            android:editable="false"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="22dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp">
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="20dp"
+                android:layout_gravity="left"
+                android:src="@drawable/female" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Leila M. Beltramini"
+                android:editable="false"
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000" />
+        </LinearLayout>
+        //***********************************FIM**********************
+        //*********************************INICIO*********************
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Consultor de Tecnologia de Informação e Design de Software"
+            android:editable="false"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="22dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp">
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="20dp"
+                android:layout_gravity="left"
+                android:src="@drawable/male" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Claudinei Caetano de Souza"
+                android:editable="false"
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp">
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="20dp"
+                android:layout_gravity="left"
+                android:src="@drawable/male" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Raphael Carvalho"
+                android:editable="false"
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000" />
+        </LinearLayout>
+        //***********************************FIM**********************
+        //*********************************INICIO*********************
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Desenvolvimento de software"
+            android:editable="false"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="22dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Programação"
+            android:editable="false"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            android:textStyle="italic"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp">
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="20dp"
+                android:layout_gravity="left"
+                android:src="@drawable/male" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Diego Prosperi Turibio"
+                android:editable="false"
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Conteúdo"
+            android:editable="false"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            android:textStyle="italic"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp">
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="20dp"
+                android:layout_gravity="left"
+                android:src="@drawable/female" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Marília F. Silva"
+                android:editable="false"
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp">
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="20dp"
+                android:layout_gravity="left"
+                android:src="@drawable/female" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Caroline Ceribeli"
+                android:editable="false"
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Revisão de Conteúdo"
+            android:editable="false"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            android:textStyle="italic"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp">
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="20dp"
+                android:layout_gravity="left"
+                android:src="@drawable/female" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Leila M. Beltramini"
+                android:editable="false"
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp">
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="20dp"
+                android:layout_gravity="left"
+                android:src="@drawable/female" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nelma R. S. Bossolan"
+                android:editable="false"
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Avaliação"
+            android:editable="false"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            android:textStyle="italic"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp">
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="20dp"
+                android:layout_gravity="left"
+                android:src="@drawable/female" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gislaine Costa"
+                android:editable="false"
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000" />
+        </LinearLayout>
+        //***********************************FIM**********************
+    </LinearLayout>
+</ScrollView>
