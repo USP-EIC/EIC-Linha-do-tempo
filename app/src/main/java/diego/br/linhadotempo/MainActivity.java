@@ -10,7 +10,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.v7.app.AppCompatActivity;
+//import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private int year;
     private int arraySize;
     private TimeLine[] timeLine;
+
 
     Calendar calendario = Calendar.getInstance();
 
@@ -322,7 +324,7 @@ public class MainActivity extends AppCompatActivity {
     public class TimeLine {
 
 
-        private final String server = "http://143.107.230.59";
+        private final String server = "http://eic.ifsc.usp.br:3001";
         private String id;
         private String title;
         private String date;

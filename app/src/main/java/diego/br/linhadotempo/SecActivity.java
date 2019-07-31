@@ -196,7 +196,7 @@ public class SecActivity extends MainActivity {
 
 
         AcessarURL url = new AcessarURL();
-        url.AcessarUrl("http://143.107.230.59/search/" + getData() + ".json");
+        url.AcessarUrl("http://eic.ifsc.usp.br:3001/search/" + getData() + ".json");
         System.out.println(url.ConteudoUrl());
         //TimeLine[] timeLine = new TimeLine[10];//vetor de 10 posiçoes das requisiçoes json
         if (timeLine == null) {
@@ -211,7 +211,7 @@ public class SecActivity extends MainActivity {
         jsonresult.getCampoValue(url.ConteudoUrl(), timeLine);//metodo que acessa json e popula vetor timeLine[10]
 
         if(getArraySize() == 0) {//se nao encontrar nada para data posterior, tentar anterior
-            url.AcessarUrl("http://143.107.230.59/search/" + getData() + ".json?after=true");
+            url.AcessarUrl("http://eic.ifsc.usp.br:3001/search/" + getData() + ".json?after=true");
             jsonresult.getCampoValue(url.ConteudoUrl(), timeLine);//metodo que acessa json e popula vetor timeLine[10]
         }
             if (getArraySize() == 0) {

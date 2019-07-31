@@ -220,7 +220,7 @@ public class TercActivity extends MainActivity  {
         params.putString("name", "Linha do tempo - " + timeLine.getTitle());
         params.putString("caption", timeLine.getTitle());
         params.putString("description", timeLine.getDescription());
-        params.putString("link","http://143.107.230.59/date/" + timeLine.getDate().substring(0, 2) + "-" + timeLine.getDate().substring(3, 5)+"-"+timeLine.getDate().substring(6,10) + "?");
+        params.putString("link","http://eic.ifsc.usp.br:3001/date/" + timeLine.getDate().substring(0, 2) + "-" + timeLine.getDate().substring(3, 5)+"-"+timeLine.getDate().substring(6,10) + "?");
         params.putString("picture", timeLine.getAvatar_url_large());
 
         GraphRequest request = new GraphRequest(accessToken, "me/feed", params, HttpMethod.POST, null);
