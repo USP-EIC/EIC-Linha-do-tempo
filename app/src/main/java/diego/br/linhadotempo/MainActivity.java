@@ -3,6 +3,7 @@ package diego.br.linhadotempo;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,13 +23,17 @@ import android.widget.TextView;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
+
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
+
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.appevents.AppEventsLogger;
+import com.facebook.Profile;
+
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -43,9 +48,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
+
+
 import java.util.Calendar;
-import java.util.Collection;
+
+import static com.facebook.FacebookSdk.setAutoLogAppEventsEnabled;
 
 /**
  * Created by dpturibio on 29/09/15.
@@ -55,7 +62,9 @@ public class MainActivity extends AppCompatActivity {
     private Boolean logado=false;
     private TextView txtdate;
     private Button btn_go;
-    private Button btnFacebook;
+    private Button btnFbDate;
+    private Context mainActivityContext;
+    private LoginButton btnFacebook = null;
     private CallbackManager callbackManager;
     private LoginManager loginManager;
     private String birthdayfb;
@@ -80,16 +89,53 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
-        facebookSDKInitialize();
-        // Initialize the SDK before executing any other operations,
-        // especially, if you're using Facebook UI elements.
-        callbackManager = CallbackManager.Factory.create();
-        btnFacebook = (Button) findViewById(R.id.btn_testefb);
-
-        updateWithToken(AccessToken.getCurrentAccessToken());
         setContentView(R.layout.activity_main);
+        mainActivityContext = getApplicationContext();
+        ////////////////////
+        //facebook section//
+        ////////////////////
+        callbackManager = CallbackManager.Factory.create();
+        btnFbDate = findViewById(R.id.btn_testefb);
+        btnFacebook = findViewById(R.id.login_button);
+        btnFacebook.setPermissions("user_birthday");
+        btnFacebook.setLoginText("Logar com Facebook");
+        btnFacebook.setLogoutText("Desconectar do Facebook");
+        isFbLogged();
 
+        btnFacebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult login_result) {
+                // App code
+                //System.out.println(">>**********AccessToken.getCurrentAccessToken().getPermissions(*)= " + login_result.getAccessToken().getPermissions());
+                if(!login_result.getAccessToken().getPermissions().contains("user_birthday")){
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("Data de nascimento indisponível.")
+                            .setMessage("Para ter acesso aos eventos científicos ocorridos próximos a sua data de nascimento, habilite esta permissão de acesso no Facebook, ou selecione manualmente uma data clicando em 'Selecionar Data'")
+                            .setNegativeButton(android.R.string.ok, null)
+                            .show();
+                    btnFbDate.setVisibility(View.INVISIBLE);
+                }else{
+                    btnFbDate.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+                Log.e("dd", "facebook login canceled");
+                System.out.println("Facebook login canceled");
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+                Log.e("dd", "facebook login failed error");
+                System.out.println("ERRO: " + exception);
+            }
+        });
+        ////////////////////////
+        //end facebook section//
+        ////////////////////////
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         txtdate = (TextView) findViewById(R.id.txt_date);
@@ -132,9 +178,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         // Logs 'install' and 'app activate' App Events.
-        AppEventsLogger.activateApp(this);
+        //AppEventsLogger.activateApp(this);
         txtdate.setText("Selecionar Data");
         btn_go.setEnabled(false);
+        if(isFbLogged()){
+            System.out.println("ON____RESUME");
+            btnFbDate.setVisibility(View.VISIBLE);
+        }else{
+            btnFbDate.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -142,12 +194,11 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
 
         // Logs 'app deactivate' App Event.
-        AppEventsLogger.deactivateApp(this);
+        //AppEventsLogger.deactivateApp(this);
     }
 
     protected void facebookSDKInitialize() {
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
     }
 
@@ -161,32 +212,23 @@ public class MainActivity extends AppCompatActivity {
             Log.i("profile_pic", profile_pic + "");
             bundle.putString("profile_pic", profile_pic.toString());
 
-                bundle.putString("idFacebook", id);
-            if (object.has("first_name"))
-                bundle.putString("first_name", object.getString("first_name"));
-            if (object.has("last_name"))
-                bundle.putString("last_name", object.getString("last_name"));
-            if (object.has("email"))
-                bundle.putString("email", object.getString("email"));
-            if (object.has("gender"))
-                bundle.putString("gender", object.getString("gender"));
+            bundle.putString("idFacebook", id);
             if (object.has("birthday"))
                 bundle.putString("birthday", object.getString("birthday"));
-            if (object.has("location"))
-                bundle.putString("location", object.getJSONObject("location").getString("name"));
             birthdayfb = bundle.getString("birthday");
             return bundle;
     }
 
-    private void updateWithToken(AccessToken currentAccessToken) {
-
+    private Boolean isFbLogged() {
+        AccessToken currentAccessToken = AccessToken.getCurrentAccessToken();
         if (currentAccessToken != null) {
-            System.out.println("esta logado <> nulo");
-            logado=true;
-
+            System.out.println("ESTÁ LOGADO NO FACEBOOK");
+            logado = true;
+            return(true);
         } else {
-            System.out.println("nao ta logado == nulo");
-            logado=false;
+            System.out.println("NÃO ESTÁ LOGADO NO FACEBOOK");
+            logado = false;
+            return(false);
         }
     }
     @Override
@@ -206,7 +248,6 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent();
         i.setClass(this, SecActivity.class);
         i.putExtra("data", txtdate.getText());
-        //btn_go.setEnabled(false);
         txtdate.setText("Aguarde...");
         startActivity(i);
     }
@@ -276,6 +317,8 @@ public class MainActivity extends AppCompatActivity {
 
         loginManager.getInstance().logOut();
         System.exit(0);
+        System.out.println("EXIT");
+
     }
 
     @Override
@@ -484,28 +527,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Logar_fb(View view){
-        Collection<String> permicoes = Arrays.asList("user_birthday");
-        gerenciador_Login();
-        loginManager.getInstance().logInWithReadPermissions(this, permicoes);
-        loginManager = LoginManager.getInstance();
-    }
+        if(isFbLogged()){
+            if(AccessToken.getCurrentAccessToken().getPermissions().contains("user_birthday")) {
+                System.out.println("OK:" + AccessToken.getCurrentAccessToken().getPermissions().contains("user_birthday"));
+                System.out.println(">>" + AccessToken.getCurrentAccessToken().toString());
+                Profile profile = Profile.getCurrentProfile();
+                System.out.println("Profile:" + profile.getName());
 
-    public void gerenciador_Login() {
 
-        loginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult login_result) {
-                // App code
                 GraphRequest request = GraphRequest.newMeRequest(
-                        login_result.getAccessToken(),
+                        AccessToken.getCurrentAccessToken(),
                         new GraphRequest.GraphJSONObjectCallback() {
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 // Application code
                                 Log.v("LoginActivity", response.toString());
+
                                 try {
+                                    System.out.println(">>**********AccessToken.getCurrentAccessToken().getPermissions()= " + AccessToken.getCurrentAccessToken().getPermissions());
+                                    System.out.println(">>**********AccessToken.getCurrentAccessToken().getDeclinedPermissions()= " + AccessToken.getCurrentAccessToken().getDeclinedPermissions());
+
                                     Bundle bFacebookData = getFacebookData(object);
-                                    birthdayfb = birthdayfb.substring(3,5)+"-"+birthdayfb.substring(0,2)+"-"+birthdayfb.substring(6,10);
+                                    birthdayfb = birthdayfb.substring(3, 5) + "-" + birthdayfb.substring(0, 2) + "-" + birthdayfb.substring(6, 10);
                                     Intent i = new Intent();
                                     i.setClass(getApplicationContext(), SecActivity.class);
                                     i.putExtra("data", "F" + birthdayfb);//adiciona F ao inicio da data para saber que é proveniente do facebook
@@ -522,25 +565,14 @@ public class MainActivity extends AppCompatActivity {
                 parameters.putString("fields", "birthday");
                 request.setParameters(parameters);
                 request.executeAsync();
-
-                System.out.println("User ID: " + login_result.getAccessToken().getUserId() + "\n" +
-                        "Auth Token: " + login_result.getAccessToken().getToken());
+            }else{
+                btnFbDate.setVisibility(View.INVISIBLE);
             }
-
-            @Override
-            public void onCancel() {
-                // App code
-                Log.e("dd", "facebook login canceled");
-                System.out.println("Facebook login canceled");
-            }
-
-            @Override
-            public void onError(FacebookException exception) {
-                // App code
-                Log.e("dd", "facebook login failed error");
-                System.out.println("ERRO: " + exception);
-            }
-        });
+        }else
+        {
+            btnFbDate.setVisibility(View.INVISIBLE);
+        }
     }
+
 }
 

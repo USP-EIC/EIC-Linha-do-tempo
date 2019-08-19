@@ -3,6 +3,7 @@ package diego.br.linhadotempo;
 import android.annotation.TargetApi;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -19,20 +20,25 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookRequestError;
+import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.facebook.share.Sharer;
+import com.facebook.share.model.ShareHashtag;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 
 import java.util.Arrays;
-
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 /**
  * Created by dpturibio on 10/11/15.
  */
 public class TercActivity extends MainActivity  {
+    private CallbackManager callbackManager;
     private AccessToken accessToken;
     private CallbackManager callbackManager3;
     private FacebookCallback<LoginResult> FacebookCallback3;
@@ -51,9 +57,9 @@ public class TercActivity extends MainActivity  {
         reg = separateString(dataRcvd); //separa a string recebida
         PopularTerceiraJanela(reg);
 
-        facebookSDKInitialize();
-        callbackManager3 = CallbackManager.Factory.create();
-        getLoginDetails3();
+        //facebookSDKInitialize();
+        //callbackManager3 = CallbackManager.Factory.create();
+        //getLoginDetails3();
     }
 
     //------------------------------------+
@@ -206,7 +212,54 @@ public class TercActivity extends MainActivity  {
     }
 
     public void PostOnFb(TimeLine timeLine){
-        accessToken = AccessToken.getCurrentAccessToken();
+
+
+        //FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
+        final ShareDialog shareDialog = new ShareDialog(this);
+
+        shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
+
+            @Override
+            public void onSuccess(Sharer.Result result) {
+                Toast.makeText(TercActivity.this, "Postado no Facebook", Toast.LENGTH_SHORT).show();
+                System.out.println("Postado no facebook com sucesso!");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Toast.makeText(TercActivity.this, "Erro ao publicar", Toast.LENGTH_SHORT).show();
+                System.out.println("ERRO AO POSTAR: " + error);
+            }
+
+            @Override
+            public void onCancel() {
+                Toast.makeText(TercActivity.this, "Cancelado", Toast.LENGTH_SHORT).show();
+                System.out.println("cancelado");
+            }
+        });
+
+
+        if (shareDialog.canShow(ShareLinkContent.class)) {
+            System.out.println("Title_hashTag: " + timeLine.getTitle().replaceAll(" ", ""));
+            System.out.println("Title_date: " + timeLine.getDate());
+            System.out.println("Title_hashTag: " + timeLine.getTitle().replaceAll(" ", ""));
+            ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                    .setContentUrl(Uri.parse("http://eic.ifsc.usp.br:3001/date/" +
+                            timeLine.getDate().substring(0, 2) + "-" +
+                            timeLine.getDate().substring(3, 5)+ "-" +
+                            timeLine.getDate().substring(6,10) + "?"))
+                    .setQuote("⊕  " + timeLine.getTitle().toUpperCase() + "\n\n" + timeLine.getDate() + "\n\n" + timeLine.getDescription())
+                    .setShareHashtag(new ShareHashtag.Builder()
+                            //.setHashtag("#" + timeLine.getTitle().replaceAll(" ", "")).build())
+                            .setHashtag("#LinhaDoTempoEIC").build())
+                    .build();
+        shareDialog.show(linkContent);
+        }
+
+
+
+        /*accessToken = AccessToken.getCurrentAccessToken();
 
         if(accessToken==null){
             System.out.println("NAO ESTA LOGADO");
@@ -245,6 +298,6 @@ public class TercActivity extends MainActivity  {
         {
             Toast.makeText(TercActivity.this, "Postado no Facebook", Toast.LENGTH_SHORT).show();
             System.out.println("Postado no facebook com sucesso!");
-        }
+        }*/
     }
 }
