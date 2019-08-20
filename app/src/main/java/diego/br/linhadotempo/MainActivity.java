@@ -497,7 +497,12 @@ public class MainActivity extends AppCompatActivity {
                 System.exit(1);
             } catch (IOException e2) {
                 System.out.println("Erro ao acessar URL:" + e2.getMessage() + ", " + e2.getCause());
-                System.exit(1);
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Não foi possivel estabelecer uma conexão.")
+                        .setMessage(e2.getMessage() + "\nVerifique sua conexão com a internet e tente novamente.")
+                        .setNegativeButton(android.R.string.ok, null)
+                        .show();
+                //System.exit(1);
             }
 
         }

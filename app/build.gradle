@@ -8,7 +8,7 @@ android {
         applicationId "diego.br.linhadotempo"
         minSdkVersion 15
         targetSdkVersion 29
-        versionCode 201902
+        versionCode 201903
         versionName "2019"
         ndk.abiFilters 'armeabi-v7a','arm64-v8a','x86','x86_64'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
